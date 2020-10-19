@@ -5,7 +5,6 @@ FSJS project 2 - List Filter and Pagination
    
 /*Global variable to store the student list item elements in the student list*/
 const studentList = document.querySelectorAll('.student-item');
-console.log(studentList);
 /*Global variable to store the number of items to select at any given time */
 const perPage = 10;
 
@@ -18,19 +17,19 @@ function showPage(list, page){
   // Loop over the list parameter and set the style.display of each list item to 'none' to hide all items
   
    for (let i = 0; i < list.length; i++){
-      console.log('poop'); 
       list[i].style.display = 'none';
    }
  //Loop over the list parameter again to set the style.display of each list item to 'block' to show the items only in the index range
 
  for (let i = 0; i < list.length; i++){
    if (i >= startIndex && i < endIndex) {
-    console.log('pee');
     list[i].style.display = 'block';
       }
    }
  }
-  //showPage(studentList, 6);
+
+ //call showPage on the first page so that on load it limits to first section
+ showPage(studentList, 1);
 
   /*** 
    Create the `appendPageLinks function` to generate, append, and add 
