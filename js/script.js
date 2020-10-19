@@ -3,40 +3,34 @@ Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
    
-/*Global variable to store the student list item elements in the student list*/
+//Global variable to store the student list item elements in the student list
 const studentList = document.querySelectorAll('.student-item');
-/*Global variable to store the number of items to select at any given time */
+//Global variable to store the number of items to select at any given time
 const perPage = 10;
 
 //Create a `showPage` function to hide all of the items in the list except for the ten we want to show.
-
 function showPage(list, page){
    // Create index for page range
    const startIndex = (page * perPage) - perPage;
    const endIndex = (page * perPage);
-  // Loop over the list parameter and set the style.display of each list item to 'none' to hide all items
-  
+
+   //Loop over the list parameter and set the style.display of each list item to 'none' to hide all items
    for (let i = 0; i < list.length; i++){
       list[i].style.display = 'none';
-   }
- //Loop over the list parameter again to set the style.display of each list item to 'block' to show the items only in the index range
-
- for (let i = 0; i < list.length; i++){
-   if (i >= startIndex && i < endIndex) {
-    list[i].style.display = 'block';
       }
-   }
+
+ //Loop over the list parameter again to set the style.display of each list item to 'block' to show the items only in the index range
+   for (let i = 0; i < list.length; i++){
+      if (i >= startIndex && i < endIndex) {
+      list[i].style.display = 'block';
+         }
+      }
  }
 
- //call showPage on the first page so that on load it limits to first section
+ //Call showPage on the first page so that on load it limits to first section
  showPage(studentList, 1);
 
-  /*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
-
-
+//Create the `appendPageLinks function` to generate, append, and add functionality to the pagination buttons
 function appendPageLinks(list){
 
    //Create a DIV element with and store it to a variable
@@ -54,8 +48,7 @@ function appendPageLinks(list){
 
    //create a variable to calculate the number of pages needed to display ten per page.  Divide the list length by the perPage variable and round up.
    let numberPages = Math.ceil(list.length / perPage);
-   console.log(numberPages);
-
+ 
    //Loop the numberPages times to create the required number of LI elements so there is one for each page of 10 (or less if last page).
       for (let i = 0; i < numberPages; i++){ 
          let li = document.createElement('li');
@@ -67,40 +60,33 @@ function appendPageLinks(list){
          a.textContent = i+1;
          li.appendChild(a);
           }
-// Add the active class name to the first pagination link initially.
-document.querySelector('a').className = "active";
-//Add a “click” event listener to each A element. A loop can be helpful here.
 
-function setAction(event){
-   const buttons = document.getElementsByTagName('a');
-   for (let i = 0; i < buttons.length; i++){
-   //remove active class name from all links
-   buttons[i].classList.remove('active')
-   // add active class to the link that was just clicked (target property of the event object)
-   let buttonClicked = event.target;
-   let pageClicked = event.target.textContent
-   buttonClicked.classList.add('active');
-   }
-}
+   // Add the active class name to the first pagination link initially.
+   document.querySelector('a').className = "active";
+
+   //Add a “click” event listener to each A element. A loop can be helpful here.
+   function setAction(event){
+         const buttons = document.getElementsByTagName('a');
+         for (let i = 0; i < buttons.length; i++){
+         //remove active class name from all links
+         buttons[i].classList.remove('active')
+         // add active class to the link that was just clicked (target property of the event object)
+         let buttonClicked = event.target;
+         let pageClicked = event.target.textContent
+         buttonClicked.classList.add('active');
+         }
+      }
 
 for (let i = 0; i < numberPages; i++){
    const buttons = document.getElementsByTagName('a');
       buttons[i].addEventListener('click', (event) => {
 
          setAction(event);
+         //Calling the show page function, passing in as arguments the global variable for the list items and the page number that should be shown.  To get the page number that should be shown, we use the text content of the A element just clicked.
          showPage(studentList, event.target.textContent);
-
-  
-        
-      //The function to show a page should be called, passing in as arguments, the global variable for the list items, and the page number that should be shown. The text content of the A element that was just clicked can be helpful here. */
-
-
-
-   })
-}
+      })
+   }
 }
 
-
- 
-
+//Call the append page links function, passing in as an argument the global variable for the list items.
 appendPageLinks(studentList);
