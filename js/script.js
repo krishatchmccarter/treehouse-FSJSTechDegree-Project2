@@ -43,7 +43,6 @@ function appendPageLinks(list){
 
    //create a nested ul element 
    let ul = document.createElement('ul');
-   ul.className = "Catnip";
    div.appendChild(ul);
 
    //create a variable to calculate the number of pages needed to display ten per page.  Divide the list length by the perPage variable and round up.
@@ -55,7 +54,7 @@ function appendPageLinks(list){
          ul.appendChild(li);
          //each LI element contains an A element with href attribute of #
          let a = document.createElement('a');
-         a.href = "#"
+         a.href = "#";
          //The text content shows the page number on which each link will show.
          a.textContent = i+1;
          li.appendChild(a);
@@ -72,7 +71,7 @@ function appendPageLinks(list){
          buttons[i].classList.remove('active')
          // add active class to the link that was just clicked (target property of the event object)
          let buttonClicked = event.target;
-         let pageClicked = event.target.textContent
+         let pageClicked = event.target.textContent;
          buttonClicked.classList.add('active');
          }
       }
